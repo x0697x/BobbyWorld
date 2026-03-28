@@ -1,5 +1,5 @@
 #ifndef PLAYER_HPP
-#define Player_HPP
+#define PLAYER_HPP
 
 #include <SFML/Graphics.hpp>
 
@@ -9,6 +9,7 @@ public:
 	void update(float dt); // Movement logic
 	void draw(sf::RenderWindow& window); // Rendering
 	void grow(float amount);
+	void setColor(sf::Color color) { shape.setFillColor(color); }
 
 	// Camera and collision
 	sf::Vector2f getPosition() const { return shape.getPosition(); }

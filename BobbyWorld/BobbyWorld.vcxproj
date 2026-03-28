@@ -140,12 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bot.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bot.hpp" />
+    <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="HUD.hpp" />
     <ClInclude Include="Player.hpp" />
   </ItemGroup>

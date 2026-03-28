@@ -8,7 +8,7 @@ class HUD {
 public:
 	HUD();
 	// Update numbers
-	void update(float dt, float playerRadius, int botCount);
+	void update(float dt, float playerRadius, int botCount, int eatenCount, float totalTime);
 	// Draw window (static)
 	void draw(sf::RenderWindow& window);
 
@@ -17,8 +17,11 @@ private:
 	sf::Text massText;
 	sf::Text botText;
 	sf::Text fpsText;
+	sf::Text eatenText;
+	sf::Text timeText;
 
 	float fpsTimer;
+	float totalTime;
 	int frameCount;
 	int lastFPS;
 };

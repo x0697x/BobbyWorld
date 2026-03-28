@@ -5,6 +5,7 @@
 #include "Bot.hpp"
 #include <cmath>
 #include "HUD.hpp"
+#include "GameManager.hpp"
 
 int main() {
 	// Main window
@@ -29,6 +30,9 @@ int main() {
 	sf::View view(sf::FloatRect({ 0, 0 }, { 1280, 800 }));
 	sf::Clock clock;
 
+    //Eaten counter
+    int eatenCount = 0;
+
 	// Bots
 	std::vector<Bot> bots;
 	// Initial spawn
@@ -38,8 +42,11 @@ int main() {
 		bots.emplace_back(sizeDist(gen), sf::Vector2f{ posDist(gen), posDist(gen) }, gen);
 	}
 
-    //HUD
+    // HUD
     HUD hud;
+
+    // GM
+    GameManager gm;
 
 	// Main game loop
 	while (window.isOpen()) {
@@ -51,6 +58,8 @@ int main() {
 				window.close();
 		}
 
+        // GM update
+        gm.update(dt, bobby);
 		// Update player
 		bobby.update(dt);
 
@@ -74,12 +83,9 @@ int main() {
             // Bot update
             bots[i].update(dt, gen);
 
-            // HUD update
-            hud.update(dt, bobby.getRadius(), (int)bots.size());
-
-            // Movement and Color
-            if (bots[i].getRadius() > bobby.getRadius()) bots[i].setColor(sf::Color::Red);
-            else bots[i].setColor(sf::Color::White);
+            // DEBUG COLOR MODE
+            //if (bots[i].getRadius() > bobby.getRadius()) bots[i].setColor(sf::Color::Red);
+            //else bots[i].setColor(sf::Color::White);
 
             // Bobby vs Bot Collision
             float distance = std::sqrt(distSq);
@@ -87,6 +93,7 @@ int main() {
                 if (bobby.getRadius() > bots[i].getRadius()) {
                     bobby.grow(bots[i].getRadius() * 0.15f); // Growth factor
                     bots.erase(bots.begin() + i);
+                    gm.addEaten(); // Tell GM to incr internal counter
                     --i;
                     continue;
                 }
@@ -121,6 +128,10 @@ int main() {
                 }
             }
         }
+
+        // HUD update
+        gm.update(dt, bobby);
+        hud.update(dt, bobby.getRadius(), (int)bots.size(), gm.getEatenCount(), gm.getTotalTime());
 
         // 3. SPAWNING LOOP (With Safe-Zone)
         if (bots.size() < 40) {
@@ -173,6 +184,7 @@ int main() {
 
         for (auto& bot : bots) bot.draw(window);
         bobby.draw(window);
+        gm.drawSparkles(window);
         hud.draw(window);
         window.display();
     }
