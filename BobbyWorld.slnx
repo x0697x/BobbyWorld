@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="BobbyWorld/BobbyWorld.vcxproj" Id="caac3174-0fb3-4148-930b-f41b1232bf38" />
+</Solution>
