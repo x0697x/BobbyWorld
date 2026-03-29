@@ -25,7 +25,7 @@ void DiscordManager::update(float mass, int eaten) {
     activity.GetTimestamps().SetStart(time(0));
 
     // Images (matches the name you uploaded to the portal)
-    activity.GetAssets().SetLargeImage("bobby_large");
+    activity.GetAssets().SetLargeImage("bobbyworldicon");
     activity.GetAssets().SetLargeText("Bobby is growing!");
 
     core->ActivityManager().UpdateActivity(activity, [](discord::Result result) {
