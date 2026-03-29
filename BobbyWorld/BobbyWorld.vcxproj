@@ -183,12 +183,21 @@
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="HUD.hpp" />
     <ClInclude Include="Player.hpp" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\bobbyfont.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="DiscordSDK\discord_game_sdk.dll.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\BobbyWorldCover.png" />
+    <Image Include="Resources\BobbyWorldIcon.ico" />
+    <Image Include="Resources\BobbyWorldIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BobbyWorld.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
