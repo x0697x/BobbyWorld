@@ -19,11 +19,14 @@ private:
 	sf::Text fpsText;
 	sf::Text eatenText;
 	sf::Text timeText;
+	sf::Text versionText;
+	sf::Text creditText;
 
 	float fpsTimer;
 	float totalTime;
 	int frameCount;
 	int lastFPS;
+	float appVersion;
 };
 
 #endif

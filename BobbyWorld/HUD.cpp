@@ -12,12 +12,34 @@ HUD::HUD() :
 	botText(font),
 	fpsText(font),
 	eatenText(font),
-	timeText(font)
+	timeText(font),
+	versionText(font),
+	creditText(font)
+
 {
 	// Load font
 	if (!font.openFromFile("Resources/bobbyfont.ttf")) {
 		// Handle error
 	}
+
+	// Helper lambda to apply the border to all texts easily
+	auto applyStyle = [](sf::Text& t) {
+		t.setOutlineColor(sf::Color::White);
+		t.setOutlineThickness(1.f);
+		// Optional: If the border is white, you might want the inner text 
+		// to be a bit darker (like Grey or Black) so the border stands out.
+		t.setFillColor(sf::Color::White);
+		t.setOutlineColor(sf::Color::Black);
+		};
+
+	// Apply to all your HUD elements
+	applyStyle(fpsText);
+	applyStyle(timeText);
+	applyStyle(eatenText);
+	applyStyle(massText);
+	applyStyle(botText);
+	applyStyle(versionText);
+	applyStyle(creditText);
 
 	// FPS
 	fpsText.setFont(font);
@@ -50,6 +72,21 @@ HUD::HUD() :
 	botText.setCharacterSize(18);
 	botText.setFillColor(sf::Color::White);
 	botText.setPosition({ 20.f, 115.f });
+
+	// Version Text Setup
+	versionText.setFont(font);
+	versionText.setString("Version 0.5"); // Change * to your version
+	versionText.setCharacterSize(16);
+	versionText.setFillColor(sf::Color(200, 200, 200, 150)); // Slightly transparent grey
+	// Position: Right side (1280 - margin) and Bottom (720 - margin)
+	versionText.setPosition({ 1112.f, 660.f });
+
+	// Credit Text Setup
+	creditText.setFont(font);
+	creditText.setString("Made by x0697x");
+	creditText.setCharacterSize(16);
+	creditText.setFillColor(sf::Color(200, 200, 200, 150));
+	creditText.setPosition({ 1050.f, 680.f });
 }
 
 void HUD::update(float dt, float playerRadius, int botCount, int eatenCount, float totalTime) {
@@ -94,6 +131,8 @@ void HUD::draw(sf::RenderWindow& window) {
 		window.draw(fpsText);
 		window.draw(timeText);
 		window.draw(eatenText);
+		window.draw(versionText);
+		window.draw(creditText);
 
 		// Sitch back to game cam
 		window.setView(oldView);
