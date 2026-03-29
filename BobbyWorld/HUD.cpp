@@ -62,7 +62,7 @@ void HUD::update(float dt, float playerRadius, int botCount, int eatenCount, flo
 
 	// Time string
 	std::stringstream timeSS;
-	timeSS << "Time: " << minutes << ":" << (seconds < 10 ? "0" : "") << seconds;
+	timeSS << "Session: " << minutes << ":" << (seconds < 10 ? "0" : "") << seconds;
 	timeText.setString(timeSS.str());
 
 	// Update mass

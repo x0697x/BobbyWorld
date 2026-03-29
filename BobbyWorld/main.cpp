@@ -66,8 +66,6 @@ int main() {
                     window.close();
             }
 
-            // GM update
-            gm.update(dt, bobby);
             // Update player
             bobby.update(dt);
 
@@ -140,7 +138,7 @@ int main() {
 
             // HUD update
             gm.update(dt, bobby);
-            hud.update(dt, bobby.getRadius(), (int)bots.size(), gm.getEatenCount(), gm.getTotalTime());
+            hud.update(dt, bobby.getRadius(), bots.size(), gm.getEatenCount(), gm.getTotalTime());
 
             // 1. Run Discord Callbacks every frame
             discordRPC.runCallbacks();
