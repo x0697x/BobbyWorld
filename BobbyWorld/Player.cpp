@@ -15,6 +15,12 @@ void Player::update(float dt) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) movement.x -= 1.f;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) movement.x += 1.f;
 
+	// Prevent diagonal is faster
+	if (movement.x != 0.f || movement.y != 0.f) {
+		float length = std::sqrt(movement.x * movement.x + movement.y * movement.y);
+		movement /= length;
+	}
+
 	// Move shape
 	shape.move(movement * speed * dt);
 }
