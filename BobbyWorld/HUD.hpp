@@ -26,7 +26,6 @@ private:
 	float totalTime;
 	int frameCount;
 	int lastFPS;
-	float appVersion;
 };
 
 #endif

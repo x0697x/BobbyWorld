@@ -136,9 +136,9 @@ int main() {
                 }
             }
 
-            // HUD update
+            // Updates
             gm.update(dt, bobby);
-            hud.update(dt, bobby.getRadius(), bots.size(), gm.getEatenCount(), gm.getTotalTime());
+            hud.update(dt, bobby.getRadius(), static_cast<int>(bots.size()), gm.getEatenCount(), gm.getTotalTime());
 
             // 1. Run Discord Callbacks every frame
             discordRPC.runCallbacks();
