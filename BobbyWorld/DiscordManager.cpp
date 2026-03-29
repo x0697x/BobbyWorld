@@ -3,8 +3,9 @@
 #include <ctime>
 
 DiscordManager::DiscordManager() {
-    // Replace with your actual Client ID from the portal
-    auto result = discord::Core::Create(1487603160880251050, DiscordCreateFlags_Default, &core);
+    // Capture the time the manager was created (Game Start)
+    startTime = std::time(nullptr);
+    auto result = discord::Core::Create(1487603160880251050, DiscordCreateFlags_Default, &core); // Replace with your actual Client ID from the portal
     if (result != discord::Result::Ok) {
         std::cout << "Discord RPC Failed to initialize." << std::endl;
     }
@@ -22,7 +23,7 @@ void DiscordManager::update(float mass, int eaten) {
     activity.SetState(("Eaten: " + std::to_string(eaten)).c_str());
 
     // Timer since the game started
-    activity.GetTimestamps().SetStart(time(0));
+    activity.GetTimestamps().SetStart(startTime);
 
     // Images (matches the name you uploaded to the portal)
     activity.GetAssets().SetLargeImage("bobbyworldicon");

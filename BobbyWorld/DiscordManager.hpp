@@ -14,6 +14,7 @@ public:
 
 private:
     discord::Core* core{ nullptr };
+    int64_t startTime;
 };
 
 #endif
