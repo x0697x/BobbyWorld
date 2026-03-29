@@ -77,7 +77,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\libs\SFML-3.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\libs\discord_game_sdk\cpp;C:\libs\SFML-3.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -95,7 +95,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\libs\SFML-3.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\libs\discord_game_sdk\cpp;C:\libs\SFML-3.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -111,13 +111,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\libs\SFML-3.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\libs\discord_game_sdk\cpp;C:\libs\SFML-3.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\libs\SFML-3.0.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\libs\discord_game_sdk\lib\x86_64;C:\libs\SFML-3.0.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);discord_game_sdk.dll.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,30 +129,66 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\libs\SFML-3.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\libs\discord_game_sdk\cpp;C:\libs\SFML-3.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\libs\SFML-3.0.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);sfml-graphics.lib;sfml-window.lib;sfml-system.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\libs\discord_game_sdk\lib\x86_64;C:\libs\SFML-3.0.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);discord_game_sdk.dll.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\achievement_manager.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\activity_manager.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\application_manager.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\core.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\image_manager.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\lobby_manager.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\network_manager.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\overlay_manager.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\relationship_manager.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\storage_manager.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\store_manager.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\types.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\user_manager.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\voice_manager.cpp" />
     <ClCompile Include="Bot.cpp" />
+    <ClCompile Include="DiscordManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\achievement_manager.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\activity_manager.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\application_manager.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\core.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\discord.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\event.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\ffi.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\image_manager.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\lobby_manager.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\network_manager.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\overlay_manager.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\relationship_manager.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\storage_manager.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\store_manager.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\types.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\user_manager.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\libs\discord_game_sdk\cpp\voice_manager.h" />
     <ClInclude Include="Bot.hpp" />
+    <ClInclude Include="DiscordManager.hpp" />
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="HUD.hpp" />
     <ClInclude Include="Player.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\bobbyfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="DiscordSDK\discord_game_sdk.dll.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
