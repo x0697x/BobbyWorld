@@ -66,9 +66,6 @@ int main() {
                     window.close();
             }
 
-            // Update player
-            bobby.update(dt);
-
             // ZoomFactor
             float zoomFactor = 1.0f + (bobby.getRadius() - 20.0f) / 200.0f;
 
@@ -136,7 +133,7 @@ int main() {
                 }
             }
 
-            // Updates
+            // Logic updates
             gm.update(dt, bobby);
             hud.update(dt, bobby.getRadius(), static_cast<int>(bots.size()), gm.getEatenCount(), gm.getTotalTime());
 
