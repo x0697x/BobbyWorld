@@ -10,18 +10,22 @@ Player::Player(float radius, sf::Color color) : speed(300.0f) {
 void Player::update(float dt) {
 	sf::Vector2f movement(0.f, 0.f);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)) movement.y -= 1.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) movement.y += 1.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) movement.x -= 1.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) movement.x += 1.f;
+	// Use Scancodes for better compatibility in SFML 3.0
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Z) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::W))
+		movement.y -= 1.f;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::S))
+		movement.y += 1.f;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Q) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::A))
+		movement.x -= 1.f;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::D))
+		movement.x += 1.f;
 
-	// Prevent diagonal is faster
+	// Normalize diagonal movement speed
 	if (movement.x != 0.f || movement.y != 0.f) {
 		float length = std::sqrt(movement.x * movement.x + movement.y * movement.y);
 		movement /= length;
 	}
 
-	// Move shape
 	shape.move(movement * speed * dt);
 }
 
