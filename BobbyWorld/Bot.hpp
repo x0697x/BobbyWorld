@@ -9,7 +9,7 @@ public:
 	// Generator by reference
 	Bot(float radius, sf::Vector2f position, std::mt19937& gen);
 
-	void update(float dt, std::mt19937& gen);
+	void update(float dt, sf::Vector2f playerPos, std::mt19937& gen);
 	void draw(sf::RenderWindow& window);
 
 	// Growth & collision helper
@@ -17,6 +17,10 @@ public:
 	float getRadius() const { return shape.getRadius(); }
 	void setRadius(float newRadius);
 	void setColor(sf::Color color);
+
+	// Alpha
+	bool isAlpha = false;
+	void setAlpha(bool status) { isAlpha = status; }
 
 private:
 	sf::CircleShape shape;

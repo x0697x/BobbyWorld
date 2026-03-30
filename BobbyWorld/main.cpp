@@ -34,11 +34,23 @@ int main() {
     sf::View view(sf::FloatRect({ 0, 0 }, { 1280, 800 }));
     sf::Clock clock;
 
+    // --- INITIAL BOTS SPAWNING ---
     std::vector<Bot> bots;
     for (int i = 0; i < 40; ++i) {
-        std::uniform_real_distribution<float> posDist(-1000.f, 2000.f);
+        std::uniform_real_distribution<float> posDist(-2000.f, 2000.f); // Wider range
         std::uniform_real_distribution<float> sizeDist(10.f, 40.f);
-        bots.emplace_back(sizeDist(gen), sf::Vector2f{ posDist(gen), posDist(gen) }, gen);
+
+        sf::Vector2f spawnPos;
+        float minSafeDistance = 600.f; // Bot dist from Bobby at start
+
+        // Keep gen pos until outside safezone
+        do {
+            spawnPos = { posDist(gen), posDist(gen) };
+            float distToCenter = std::sqrt(spawnPos.x * spawnPos.x + spawnPos.y * spawnPos.y);
+            if (distToCenter > minSafeDistance) break;
+        } while (true);
+
+        bots.emplace_back(sizeDist(gen), spawnPos, gen);
     }
 
     HUD hud;
@@ -73,7 +85,7 @@ int main() {
                 continue;
             }
 
-            bots[i].update(dt, gen);
+            bots[i].update(dt, bobby.getPosition(), gen);
 
             float distance = std::sqrt(distSq);
             if (distance < bobby.getRadius() + bots[i].getRadius()) {
@@ -130,10 +142,16 @@ int main() {
             std::uniform_real_distribution<float> sizeDist(minS, maxS);
             float finalSize = sizeDist(gen);
 
+            // Check if spawn is Alpha (10% chance)
             if (std::uniform_real_distribution<float>(0, 1)(gen) > 0.9f) {
                 finalSize *= 1.5f;
+                bots.emplace_back(finalSize, spawnPos, gen); // Create bot
+                bots.back().setAlpha(true); // Flag aggressive
+                bots.back().setColor(sf::Color::Red); // Color on for Alpha
             }
-            bots.emplace_back(finalSize, spawnPos, gen);
+            else {
+                bots.emplace_back(finalSize, spawnPos, gen);
+            }
         }
 
         // --- DISCORD & HUD UPDATES ---

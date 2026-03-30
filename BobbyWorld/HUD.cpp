@@ -75,7 +75,7 @@ HUD::HUD() :
 
 	// Version Text Setup
 	versionText.setFont(font);
-	versionText.setString("Version 0.5"); // Change * to your version
+	versionText.setString("Version 0.6"); // Ver
 	versionText.setCharacterSize(16);
 	versionText.setFillColor(sf::Color(200, 200, 200, 150));
 	versionText.setPosition({ 1112.f, 660.f });

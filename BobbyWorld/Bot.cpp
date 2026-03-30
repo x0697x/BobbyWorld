@@ -10,23 +10,35 @@ Bot::Bot(float radius, sf::Vector2f position, std::mt19937& gen) {
 	changeDirTimer = 0.0f;
 
 	// Initial random direction
-	std::uniform_real_distribution<float> angleDist(0, 2.0f * 3.12159f);
+	std::uniform_real_distribution<float> angleDist(0, 2.0f * 3.14159f);
 	float angle = angleDist(gen);
 	direction = { cos(angle), sin(angle) };
 }
 
-void Bot::update(float dt, std::mt19937& gen) {
-	changeDirTimer -= dt;
+void Bot::update(float dt, sf::Vector2f playerPos, std::mt19937& gen) {
+	// Calculate distance to Bobby
+	sf::Vector2f toPlayer = playerPos - shape.getPosition();
+	float distance = std::sqrt(toPlayer.x * toPlayer.x + toPlayer.y * toPlayer.y);
 
-	if (changeDirTimer <= 0.0f) {
-		// New random direction
-		std::uniform_real_distribution<float> angleDist(0, 2.0f * 3.14159f);
-		float angle = angleDist(gen);
-		direction = { cos(angle), sin(angle) };
+	// Chase
+	float detectionRange = 600.0f;
+	if (isAlpha && distance < detectionRange) {
+		direction = toPlayer / distance; // Normalize
+		speed = 150.0f; // Alpha faster when chase
+	}
+	else {
+		changeDirTimer -= dt;
 
-		// Reset timer to change direction ; "*,*" = between
-		std::uniform_real_distribution<float> timerDist(1.0f, 3.0f);
-		changeDirTimer = timerDist(gen);
+		if (changeDirTimer <= 0.0f) {
+			// New random direction
+			std::uniform_real_distribution<float> angleDist(0, 2.0f * 3.14159f);
+			float angle = angleDist(gen);
+			direction = { cos(angle), sin(angle) };
+
+			// Reset timer to change direction ; "*,*" = between
+			std::uniform_real_distribution<float> timerDist(1.0f, 3.0f);
+			changeDirTimer = timerDist(gen);
+		}
 	}
 
 	shape.move(direction * speed * dt);
