@@ -6,13 +6,13 @@
 
 class Bot {
 public:
-	// Generator by reference
+	// Gen by ref
 	Bot(float radius, sf::Vector2f position, std::mt19937& gen);
 
 	void update(float dt, sf::Vector2f playerPos, std::mt19937& gen);
 	void draw(sf::RenderWindow& window);
 
-	// Growth & collision helper
+	// Growth & coll helper
 	sf::Vector2f getPosition() const { return shape.getPosition(); }
 	float getRadius() const { return shape.getRadius(); }
 	void setRadius(float newRadius);

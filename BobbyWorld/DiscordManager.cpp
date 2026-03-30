@@ -3,9 +3,9 @@
 #include <ctime>
 
 DiscordManager::DiscordManager() {
-    // Capture the time the manager was created (Game Start)
+    // Capture time manager was created (game start)
     startTime = std::time(nullptr);
-    auto result = discord::Core::Create(1487603160880251050, DiscordCreateFlags_Default, &core); // Replace with your actual Client ID from the portal
+    auto result = discord::Core::Create(1487603160880251050, DiscordCreateFlags_Default, &core); // ID
     if (result != discord::Result::Ok) {
         std::cout << "Discord RPC Failed to initialize." << std::endl;
     }

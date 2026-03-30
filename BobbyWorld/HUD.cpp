@@ -7,7 +7,7 @@ HUD::HUD() :
 	frameCount(0),
 	lastFPS(0),
 	totalTime(0.f),
-	// SFML 3 requires passing the font in the initializer list:
+
 	massText(font),
 	botText(font),
 	fpsText(font),
@@ -19,20 +19,17 @@ HUD::HUD() :
 {
 	// Load font
 	if (!font.openFromFile("Resources/bobbyfont.ttf")) {
-		// Handle error
 	}
 
-	// Helper lambda to apply the border to all texts easily
+	// Helper to border text
 	auto applyStyle = [](sf::Text& t) {
 		t.setOutlineColor(sf::Color::White);
 		t.setOutlineThickness(1.f);
-		// Optional: If the border is white, you might want the inner text 
-		// to be a bit darker (like Grey or Black) so the border stands out.
 		t.setFillColor(sf::Color::White);
 		t.setOutlineColor(sf::Color::Black);
 		};
 
-	// Apply to all your HUD elements
+	// Apply to all HUD
 	applyStyle(fpsText);
 	applyStyle(timeText);
 	applyStyle(eatenText);
@@ -73,14 +70,14 @@ HUD::HUD() :
 	botText.setFillColor(sf::Color::White);
 	botText.setPosition({ 20.f, 115.f });
 
-	// Version Text Setup
+	// Version
 	versionText.setFont(font);
 	versionText.setString("Version 0.6"); // Ver
 	versionText.setCharacterSize(16);
 	versionText.setFillColor(sf::Color(200, 200, 200, 150));
 	versionText.setPosition({ 1112.f, 660.f });
 
-	// Credit Text Setup
+	// Credit
 	creditText.setFont(font);
 	creditText.setString("Made by x0697x");
 	creditText.setCharacterSize(16);
@@ -121,7 +118,7 @@ void HUD::update(float dt, float playerRadius, int botCount, int eatenCount, flo
 }
 
 void HUD::draw(sf::RenderWindow& window) {
-	// Important: switch to default UI view so it stay fixed
+	// Important: switch to default UI = stay fixed
 	sf::View oldView = window.getView();
 		window.setView(window.getDefaultView());
 

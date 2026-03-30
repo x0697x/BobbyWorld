@@ -7,9 +7,10 @@
 class HUD {
 public:
 	HUD();
-	// Update numbers
+	// Update
 	void update(float dt, float playerRadius, int botCount, int eatenCount, float totalTime);
-	// Draw window (static)
+
+	// Draw
 	void draw(sf::RenderWindow& window);
 
 private:

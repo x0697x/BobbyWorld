@@ -13,22 +13,21 @@ void GameManager::update(float dt, Player& player) {
     if (mass >= 30000.f) {
         spawnTimer += dt;
         if (spawnTimer >= 0.1f) {
-            // 1. Get the player radius first so we can use it
             float playerRad = player.getRadius();
 
-            // 2. Create the particle
+            // Create the particle
             Particle p;
 
-            // 3. Calculate dynamic size based on Bobby's size
+            // Calculate dynamic size based on Bobby
             float sparkleSize = playerRad * 0.05f;
             if (sparkleSize < 2.f) sparkleSize = 1.5f; // Minimum size
             if (sparkleSize > 10.f) sparkleSize = 1.5f; // Optional: Maximum size cap
 
             p.shape.setRadius(sparkleSize);
-            p.shape.setOrigin({ sparkleSize, sparkleSize }); // Center it
+            p.shape.setOrigin({ sparkleSize, sparkleSize });
             p.shape.setFillColor(sf::Color::Yellow);
 
-            // 4. Position logic
+            // Position logic
             float angle = (rand() % 360) * 3.14159f / 180.f;
             float dist = playerRad * 0.8f;
 
@@ -36,7 +35,7 @@ void GameManager::update(float dt, Player& player) {
             sf::Vector2f offset(std::cos(angle) * dist, std::sin(angle) * dist);
             p.shape.setPosition(playerPos + offset);
 
-            // 5. Physics and Life
+            // Physics & life
             p.velocity = sf::Vector2f(static_cast<float>(rand() % 40 - 20),
                 static_cast<float>(rand() % 40 - 20));
             p.lifetime = 1.0f;
@@ -67,9 +66,9 @@ void GameManager::manageProgression(Player& player) {
     float radius = player.getRadius();
     float mass = (radius * radius) / 10.f;
 
-    // --- New Gemstone Tiers ---
+    // Tier 2
     if (mass >= 15000.f) {
-        player.setColor(sf::Color(75, 0, 130));   // Indigo (Amethyst)
+        player.setColor(sf::Color(75, 0, 130));   // Indigo
     }
     else if (mass >= 12500.f) {
         player.setColor(sf::Color(0, 100, 0));    // Deep Emerald
@@ -80,7 +79,7 @@ void GameManager::manageProgression(Player& player) {
     else if (mass >= 7500.f) {
         player.setColor(sf::Color(139, 0, 0));    // Dark Ruby
     }
-    // --- Original Metallic Tiers ---
+    // Tier 1
     else if (mass >= 5000.f) {
         player.setColor(sf::Color(229, 228, 226)); // Platinum
     }

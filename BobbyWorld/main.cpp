@@ -9,11 +9,11 @@
 #include "DiscordManager.hpp"
 
 int main() {
-    // 1. Settings with Antialiasing
+    // Setting antialias
     sf::ContextSettings settings;
     settings.antiAliasingLevel = 8;
 
-    // 2. Window (Fixed constructor: added sf::Style::Default)
+    // Window
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(1280, 720)), "BobbyWorld", sf::State::Windowed, settings);
     window.setFramerateLimit(60);
 
@@ -34,7 +34,7 @@ int main() {
     sf::View view(sf::FloatRect({ 0, 0 }, { 1280, 800 }));
     sf::Clock clock;
 
-    // --- INITIAL BOTS SPAWNING ---
+    // Initial bots spawn
     std::vector<Bot> bots;
     for (int i = 0; i < 40; ++i) {
         std::uniform_real_distribution<float> posDist(-2000.f, 2000.f); // Wider range
@@ -58,7 +58,17 @@ int main() {
     DiscordManager discordRPC;
     float rpcTimer = 0.f;
 
-    // --- MAIN GAME LOOP ---
+    //                                                                                                                                                
+    //     mmm  mmm     mm      mmmmmm   mmm   mm               mmmm      mm     mmm  mmm  mmmmmmmm            mm          mmmm      mmmm    mmmmmm   
+    //     ###  ###    ####     ""##""   ###   ##             ##""""#    ####    ###  ###  ##""""""            ##         ##""##    ##""##   ##""""#m 
+    //     ########    ####       ##     ##"#  ##            ##          ####    ########  ##                  ##        ##    ##  ##    ##  ##    ## 
+    //     ## ## ##   ##  ##      ##     ## ## ##            ##  mmmm   ##  ##   ## ## ##  #######             ##        ##    ##  ##    ##  ######"  
+    //     ## "" ##   ######      ##     ##  #m##            ##  ""##   ######   ## "" ##  ##                  ##        ##    ##  ##    ##  ##       
+    //     ##    ##  m##  ##m   mm##mm   ##   ###             ##mmm##  m##  ##m  ##    ##  ##mmmmmm            ##mmmmmm   ##mm##    ##mm##   ##       
+    //     ""    ""  ""    ""   """"""   ""   """               """"   ""    ""  ""    ""  """"""""            """"""""    """"      """"    ""       
+    //                                                                                                                                                
+    //                                                                                                                                                
+
     while (window.isOpen()) {
         float dt = clock.restart().asSeconds();
 
@@ -73,7 +83,7 @@ int main() {
 
         float zoomFactor = 1.0f + (bobby.getRadius() - 20.0f) / 200.0f;
 
-        // --- BOTS LOGIC ---
+        // Bots logic
         for (int i = 0; i < bots.size(); ++i) {
             sf::Vector2f dToB = bobby.getPosition() - bots[i].getPosition();
             float distSq = dToB.x * dToB.x + dToB.y * dToB.y;
@@ -126,7 +136,8 @@ int main() {
             }
         }
 
-        // --- SPAWNING ---
+        // Spawn                                                                                
+
         if (bots.size() < 40) {
             float minSpawnDist = 1500.f * zoomFactor;
             float maxSpawnDist = 3000.f * zoomFactor;
@@ -145,7 +156,7 @@ int main() {
             // Check if spawn is Alpha (10% chance)
             if (std::uniform_real_distribution<float>(0, 1)(gen) > 0.9f) {
                 finalSize *= 1.5f;
-                bots.emplace_back(finalSize, spawnPos, gen); // Create bot
+                bots.emplace_back(finalSize, spawnPos, gen);
                 bots.back().setAlpha(true); // Flag aggressive
                 //bots.back().setColor(sf::Color::Red); // Alpha color
             }
@@ -154,7 +165,8 @@ int main() {
             }
         }
 
-        // --- DISCORD & HUD UPDATES ---
+        // Updates                                                                                                                                                                                                                    
+
         gm.update(dt, bobby);
         hud.update(dt, bobby.getRadius(), static_cast<int>(bots.size()), gm.getEatenCount(), gm.getTotalTime());
         discordRPC.runCallbacks();
@@ -166,25 +178,33 @@ int main() {
             rpcTimer = 0.f;
         }
 
-        // --- RENDERING ---
+        //                                                                                              
+        //     mmmmmm    mmmmmmmm  mmm   mm  mmmmm     mmmmmmmm  mmmmmm     mmmmmm   mmm   mm     mmmm  
+        //     ##""""##  ##""""""  ###   ##  ##"""##   ##""""""  ##""""##   ""##""   ###   ##   ##""""# 
+        //     ##    ##  ##        ##"#  ##  ##    ##  ##        ##    ##     ##     ##"#  ##  ##       
+        //     #######   #######   ## ## ##  ##    ##  #######   #######      ##     ## ## ##  ##  mmmm 
+        //     ##  "##m  ##        ##  #m##  ##    ##  ##        ##  "##m     ##     ##  #m##  ##  ""## 
+        //     ##    ##  ##mmmmmm  ##   ###  ##mmm##   ##mmmmmm  ##    ##   mm##mm   ##   ###   ##mmm## 
+        //     ""    """ """"""""  ""   """  """""     """"""""  ""    """  """"""   ""   """     """"  
+        //                                                                                              
+
         view.setSize({ 1280 * zoomFactor, 720 * zoomFactor });
         view.setCenter(bobby.getPosition());
 
         window.clear(sf::Color::Black);
         window.setView(view);
 
-        // Infinite Background Logic
+        // Infinite background logic
         float baseWorldSize = 4000.0f;
         float dynamicWorldSize = baseWorldSize * zoomFactor;
 
         for (const auto& star : stars) {
-            // Treat the star's stored position as a percentage (0.0 to 1.0) of the world
             sf::Vector2f relativePos = star.getPosition();
             sf::Vector2f absoluteStarPos = { relativePos.x * dynamicWorldSize, relativePos.y * dynamicWorldSize };
 
             sf::Vector2f vPos = view.getCenter();
 
-            // The tiling math
+            // Tiling math
             float x = std::fmod(absoluteStarPos.x - vPos.x + dynamicWorldSize / 2.0f, dynamicWorldSize);
             if (x < 0) x += dynamicWorldSize;
 

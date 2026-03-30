@@ -32,7 +32,7 @@ private:
 	int eatenCount;
 	float totalTime;
 
-	// Helper with shiny colors
+	// Helper for color progression
 	void manageProgression(Player& player);
 };
 
