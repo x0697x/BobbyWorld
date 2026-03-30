@@ -10,6 +10,10 @@
 
 int main() {
 	// Main window
+    // 1. Define settings with Antialiasing
+    sf::ContextSettings settings;
+    settings.antiAliasingLevel = 8; // 8 is usually the "sweet spot" for quality
+    // 2. Pass settings to the window constructor
 	sf::RenderWindow window(sf::VideoMode({ 1280, 720 }), "BobbyWorld");
 	window.setFramerateLimit(60);
 
@@ -64,6 +68,11 @@ int main() {
                 // Check if event closed
                 if (event->is<sf::Event::Closed>())
                     window.close();
+            }
+
+            // Ensure the window is focused before processing movement
+            if (window.hasFocus()) {
+                bobby.update(dt);
             }
 
             // ZoomFactor
@@ -200,6 +209,7 @@ int main() {
             for (auto& bot : bots) bot.draw(window);
             bobby.draw(window);
             gm.drawSparkles(window);
+            window.setView(window.getDefaultView());
             hud.draw(window);
             window.display();
         }
