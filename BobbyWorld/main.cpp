@@ -23,7 +23,7 @@ int main() {
     std::uniform_real_distribution<float> distX(0.0f, 1.0f);
     std::uniform_real_distribution<float> distY(0.0f, 1.0f);
 
-    for (int i = 0; i < 1500; ++i) {
+    for (int i = 0; i < 2000; ++i) {
         sf::CircleShape star(1.5f);
         star.setFillColor(sf::Color(150, 150, 150));
         star.setPosition({ distX(gen), distY(gen) });
@@ -41,7 +41,7 @@ int main() {
 
     // Initial bots spawn
     std::vector<Bot> bots;
-    for (int i = 0; i < 40; ++i) {
+    for (int i = 0; i < 100; ++i) {
         std::uniform_real_distribution<float> posDist(-2000.f, 2000.f); // Wider range
         std::uniform_real_distribution<float> sizeDist(10.f, 40.f);
 
@@ -178,7 +178,7 @@ int main() {
 
         // Spawn                                                                                
 
-        if (bots.size() < 40) {
+        if (bots.size() < 50) {
             float minSpawnDist = 1500.f * zoomFactor;
             float maxSpawnDist = 3000.f * zoomFactor;
             std::uniform_real_distribution<float> angleDist(0, 2.f * 3.14159f);
