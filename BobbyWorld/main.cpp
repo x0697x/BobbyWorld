@@ -32,7 +32,12 @@ int main() {
 
     Player bobby(20.0f, sf::Color::White);
     sf::View view(sf::FloatRect({ 0, 0 }, { 1280, 800 }));
-    sf::Clock clock;
+
+    // HUD & MANAGERS
+    HUD hud;
+    GameManager gm;
+    DiscordManager discordRPC;
+    bool isDead = false;
 
     // Initial bots spawn
     std::vector<Bot> bots;
@@ -53,11 +58,25 @@ int main() {
         bots.emplace_back(sizeDist(gen), spawnPos, gen);
     }
 
-    HUD hud;
-    GameManager gm;
-    DiscordManager discordRPC;
-    float rpcTimer = 0.f;
+    // ----DEATH----
+    // Death screen overlay
+    sf::RectangleShape deathOverlay(sf::Vector2f(1280.f, 720.f));
+    deathOverlay.setFillColor(sf::Color(0, 0, 0, 150));
 
+    sf::Text deathText(hud.getFont());
+    deathText.setString("   YOU ARE DEAD\nPress ESC to exit");
+    deathText.setCharacterSize(60);
+    deathText.setFillColor(sf::Color::Red);
+    deathText.setStyle(sf::Text::Bold);
+
+    // Center
+    sf::FloatRect textBounds = deathText.getLocalBounds();
+    deathText.setPosition({ 550.f / 2.0f, 550.f / 2.0f });
+    // ----DEATH----
+
+    sf::Clock clock;
+    float rpcTimer = 0.f;
+    
     //                                                                                                                                                
     //     mmm  mmm     mm      mmmmmm   mmm   mm               mmmm      mm     mmm  mmm  mmmmmmmm            mm          mmmm      mmmm    mmmmmm   
     //     ###  ###    ####     ""##""   ###   ##             ##""""#    ####    ###  ###  ##""""""            ##         ##""##    ##""##   ##""""#m 
@@ -71,14 +90,24 @@ int main() {
 
     while (window.isOpen()) {
         float dt = clock.restart().asSeconds();
-
+        // ----INPUT & EVENTS----
         while (const std::optional event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>())
                 window.close();
+
+            // Check key press
+            if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+                // Exit
+                if (keyPressed->code == sf::Keyboard::Key::Escape) {
+                    window.close();
+                }
+            }
         }
 
-        if (window.hasFocus()) {
-            bobby.update(dt);
+        if (!isDead) {
+            if (window.hasFocus()) {
+                bobby.update(dt);
+            }
         }
 
         float zoomFactor = 1.0f + (bobby.getRadius() - 20.0f) / 200.0f;
@@ -107,7 +136,7 @@ int main() {
                     continue;
                 }
                 else {
-                    window.close(); // Game Over
+                    isDead = true; // Game over
                 }
             }
 
@@ -223,6 +252,13 @@ int main() {
 
         window.setView(window.getDefaultView());
         hud.draw(window);
+
+        if (isDead) {
+            window.setView(window.getDefaultView());
+            window.draw(deathOverlay);
+            window.draw(deathText);
+        }
+
         window.display();
     }
 

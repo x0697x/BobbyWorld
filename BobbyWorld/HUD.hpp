@@ -13,6 +13,8 @@ public:
 	// Draw
 	void draw(sf::RenderWindow& window);
 
+	const sf::Font& getFont() const { return font; }
+
 private:
 	sf::Font font;
 	sf::Text massText;
@@ -22,6 +24,7 @@ private:
 	sf::Text timeText;
 	sf::Text versionText;
 	sf::Text creditText;
+	sf::Text inputText;
 
 	float fpsTimer;
 	float totalTime;

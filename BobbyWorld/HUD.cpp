@@ -14,7 +14,8 @@ HUD::HUD() :
 	eatenText(font),
 	timeText(font),
 	versionText(font),
-	creditText(font)
+	creditText(font),
+	inputText(font)
 
 {
 	// Load font
@@ -35,6 +36,7 @@ HUD::HUD() :
 	applyStyle(eatenText);
 	applyStyle(massText);
 	applyStyle(botText);
+	applyStyle(inputText);
 	applyStyle(versionText);
 	applyStyle(creditText);
 
@@ -70,9 +72,16 @@ HUD::HUD() :
 	botText.setFillColor(sf::Color::White);
 	botText.setPosition({ 20.f, 115.f });
 
+	// Inputs
+	inputText.setFont(font);
+	inputText.setString("ZQSD to move\nESC to exit");
+	inputText.setCharacterSize(18);
+	inputText.setFillColor(sf::Color::White);
+	inputText.setPosition({ 20.f, 145 });
+
 	// Version
 	versionText.setFont(font);
-	versionText.setString("Version 0.6"); // Ver
+	versionText.setString("Version 0.7"); // Ver
 	versionText.setCharacterSize(16);
 	versionText.setFillColor(sf::Color(200, 200, 200, 150));
 	versionText.setPosition({ 1112.f, 660.f });
@@ -129,6 +138,7 @@ void HUD::draw(sf::RenderWindow& window) {
 		window.draw(eatenText);
 		window.draw(versionText);
 		window.draw(creditText);
+		window.draw(inputText);
 
 		// Sitch back to game cam
 		window.setView(oldView);
