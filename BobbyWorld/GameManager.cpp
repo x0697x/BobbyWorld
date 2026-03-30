@@ -21,7 +21,7 @@ void GameManager::update(float dt, Player& player, sf::Texture& tex1, sf::Textur
             // Calculate dynamic size based on Bobby
             float sparkleSize = playerRad * 0.05f;
             if (sparkleSize < 2.f) sparkleSize = 1.5f; // Minimum size
-            if (sparkleSize > 10.f) sparkleSize = 1.5f; // Optional: Maximum size cap
+            if (sparkleSize > 10.f) sparkleSize = 1.5f; // Optional: maximum size cap
 
             p.shape.setRadius(sparkleSize);
             p.shape.setOrigin({ sparkleSize, sparkleSize });
@@ -62,6 +62,7 @@ void GameManager::update(float dt, Player& player, sf::Texture& tex1, sf::Textur
     }
 }
 
+// Progression textures
 void GameManager::manageProgression(Player& player, sf::Texture& tex1, sf::Texture& tex2, sf::Texture& tex3, sf::Texture& tex4, sf::Texture& tex5, sf::Texture& tex6, sf::Texture& tex7, sf::Texture& tex8) {
     float mass = (player.getRadius() * player.getRadius()) / 10.f;
 
@@ -77,7 +78,6 @@ void GameManager::manageProgression(Player& player, sf::Texture& tex1, sf::Textu
     else if (mass >= 15500.f) {
         player.setTexture(tex5);
     }
-    // Tier 1
     else if (mass >= 10000.f) {
         player.setTexture(tex4);
     }
