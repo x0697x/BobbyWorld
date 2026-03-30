@@ -147,7 +147,7 @@ int main() {
                 finalSize *= 1.5f;
                 bots.emplace_back(finalSize, spawnPos, gen); // Create bot
                 bots.back().setAlpha(true); // Flag aggressive
-                bots.back().setColor(sf::Color::Red); // Color on for Alpha
+                //bots.back().setColor(sf::Color::Red); // Alpha color
             }
             else {
                 bots.emplace_back(finalSize, spawnPos, gen);
