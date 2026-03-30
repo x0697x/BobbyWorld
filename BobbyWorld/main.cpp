@@ -193,16 +193,26 @@ int main() {
             window.clear(sf::Color::Black);
             window.setView(view);
 
-            float worldSize = 2500.0f;
+            float baseWorldSize = 2500.0f;
+            float dynamicWorldSize = baseWorldSize * zoomFactor;
+
             for (const auto& star : stars) {
                 sf::Vector2f pos = star.getPosition();
                 sf::Vector2f vPos = view.getCenter();
-                float x = std::fmod(pos.x - vPos.x + worldSize / 2.0f, worldSize);
-                if (x < 0) x += worldSize;
-                float y = std::fmod(pos.y - vPos.y + worldSize / 2.0f, worldSize);
-                if (y < 0) y += worldSize;
+
+                // Use dynamicWorldSize instead of the hardcoded 2500.0f
+                float x = std::fmod(pos.x - vPos.x + dynamicWorldSize / 2.0f, dynamicWorldSize);
+                if (x < 0) x += dynamicWorldSize;
+
+                float y = std::fmod(pos.y - vPos.y + dynamicWorldSize / 2.0f, dynamicWorldSize);
+                if (y < 0) y += dynamicWorldSize;
+
                 sf::CircleShape ts = star;
-                ts.setPosition({ x + vPos.x - worldSize / 2.0f, y + vPos.y - worldSize / 2.0f });
+
+                // Scale the stars slightly so they don't look like tiny dots when zoomed out
+                ts.setRadius(1.5f * zoomFactor);
+
+                ts.setPosition({ x + vPos.x - dynamicWorldSize / 2.0f, y + vPos.y - dynamicWorldSize / 2.0f });
                 window.draw(ts);
             }
 
