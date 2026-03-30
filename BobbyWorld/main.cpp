@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <random>
+#include <cmath>
 #include "Player.hpp"
 #include "Bot.hpp"
-#include <cmath>
 #include "HUD.hpp"
 #include "GameManager.hpp"
 #include "DiscordManager.hpp"
