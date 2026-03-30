@@ -9,6 +9,9 @@ public:
 	void update(float dt); // Movement logic
 	void draw(sf::RenderWindow& window); // Rendering
 	void grow(float amount);
+
+	// Textures
+	void setTexture(const sf::Texture& tex);
 	void setColor(sf::Color color) { shape.setFillColor(color); }
 
 	// Camera and collision

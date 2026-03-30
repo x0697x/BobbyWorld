@@ -2,9 +2,12 @@
 
 Player::Player(float radius, sf::Color color) : speed(300.0f) {
 	shape.setRadius(radius);
-	shape.setFillColor(color);
 	shape.setOrigin({ radius, radius });
-	shape.setPosition({ 600.0f, 400.0f });
+	shape.setPosition({ 0.0f, 0.0f });
+}
+
+void Player::setTexture(const sf::Texture& tex) {
+	shape.setTexture(&tex, true);
 }
 
 void Player::update(float dt) {

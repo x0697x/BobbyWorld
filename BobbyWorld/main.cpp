@@ -74,6 +74,17 @@ int main() {
     deathText.setPosition({ 550.f / 2.0f, 550.f / 2.0f });
     // ----DEATH----
 
+    // Load textures
+    sf::Texture tex1, tex2, tex3, tex4, tex5, tex6, tex7, tex8;
+    tex1.loadFromFile("Resources/tex1.jpg");
+    tex2.loadFromFile("Resources/tex2.jpg");
+    tex3.loadFromFile("Resources/tex3.jpg");
+    tex4.loadFromFile("Resources/tex4.jpg");
+    tex5.loadFromFile("Resources/tex5.jpg");
+    tex6.loadFromFile("Resources/tex6.jpg");
+    tex7.loadFromFile("Resources/tex7.jpg");
+    tex8.loadFromFile("Resources/tex8.jpg");
+
     sf::Clock clock;
     float rpcTimer = 0.f;
     
@@ -196,7 +207,7 @@ int main() {
 
         // Updates                                                                                                                                                                                                                    
 
-        gm.update(dt, bobby);
+        gm.update(dt, bobby, tex1, tex2, tex3, tex4, tex5, tex6, tex7, tex8);
         hud.update(dt, bobby.getRadius(), static_cast<int>(bots.size()), gm.getEatenCount(), gm.getTotalTime());
         discordRPC.runCallbacks();
 

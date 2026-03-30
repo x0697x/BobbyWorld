@@ -3,9 +3,9 @@
 
 GameManager::GameManager() : eatenCount(0), totalTime(0.f) {}
 
-void GameManager::update(float dt, Player& player) {
-	totalTime += dt;
-	manageProgression(player);
+void GameManager::update(float dt, Player& player, sf::Texture& tex1, sf::Texture& tex2, sf::Texture& tex3, sf::Texture& tex4, sf::Texture& tex5, sf::Texture& tex6, sf::Texture& tex7, sf::Texture& tex8) {
+    totalTime += dt;
+    manageProgression(player, tex1, tex2, tex3, tex4, tex5, tex6, tex7, tex8);
 
     float mass = (player.getRadius() * player.getRadius()) / 10.f;
 
@@ -62,38 +62,36 @@ void GameManager::update(float dt, Player& player) {
     }
 }
 
-void GameManager::manageProgression(Player& player) {
-    float radius = player.getRadius();
-    float mass = (radius * radius) / 10.f;
+void GameManager::manageProgression(Player& player, sf::Texture& tex1, sf::Texture& tex2, sf::Texture& tex3, sf::Texture& tex4, sf::Texture& tex5, sf::Texture& tex6, sf::Texture& tex7, sf::Texture& tex8) {
+    float mass = (player.getRadius() * player.getRadius()) / 10.f;
 
-    // Tier 2
-    if (mass >= 15000.f) {
-        player.setColor(sf::Color(75, 0, 130));   // Indigo
+    if (mass >= 100000.f) {
+        player.setTexture(tex8);
     }
-    else if (mass >= 12500.f) {
-        player.setColor(sf::Color(0, 100, 0));    // Deep Emerald
+    else if (mass >= 50000.f) {
+        player.setTexture(tex7);
     }
-    else if (mass >= 10000.f) {
-        player.setColor(sf::Color(0, 0, 139));    // Dark Sapphire
+    else if (mass >= 25000.f) {
+        player.setTexture(tex6);
     }
-    else if (mass >= 7500.f) {
-        player.setColor(sf::Color(139, 0, 0));    // Dark Ruby
+    else if (mass >= 15500.f) {
+        player.setTexture(tex5);
     }
     // Tier 1
+    else if (mass >= 10000.f) {
+        player.setTexture(tex4);
+    }
+    else if (mass >= 7500.f) {
+        player.setTexture(tex3);
+    }
     else if (mass >= 5000.f) {
-        player.setColor(sf::Color(229, 228, 226)); // Platinum
+        player.setTexture(tex2);
     }
     else if (mass >= 2500.f) {
-        player.setColor(sf::Color(218, 165, 32));  // Soft Gold
-    }
-    else if (mass >= 1000.f) {
-        player.setColor(sf::Color(192, 192, 192)); // Silver
-    }
-    else if (mass >= 500.f) {
-        player.setColor(sf::Color(169, 169, 169)); // Dark Grey
+        player.setTexture(tex1);
     }
     else {
-        player.setColor(sf::Color::White);         // Default
+        player.setColor(sf::Color::White);
     }
 }
 

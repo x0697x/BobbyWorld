@@ -16,7 +16,7 @@ public:
 	GameManager();
 
 	// Update game stats
-	void update(float dt, Player& player);
+	void update(float dt, Player& player, sf::Texture& tex1, sf::Texture& tex2, sf::Texture& tex3, sf::Texture& tex4, sf::Texture& tex5, sf::Texture& tex6, sf::Texture& tex7, sf::Texture& tex8);
 
 	// Getters HUD
 	int getEatenCount() const { return eatenCount; }
@@ -33,7 +33,7 @@ private:
 	float totalTime;
 
 	// Helper for color progression
-	void manageProgression(Player& player);
+	void manageProgression(Player& player, sf::Texture& tex1, sf::Texture& tex2, sf::Texture& tex3, sf::Texture& tex4, sf::Texture& tex5, sf::Texture& tex6, sf::Texture& tex7, sf::Texture& tex8);
 };
 
 #endif

@@ -195,6 +195,14 @@
     <Image Include="Resources\BobbyWorldCover.png" />
     <Image Include="Resources\BobbyWorldIcon.ico" />
     <Image Include="Resources\BobbyWorldIcon.png" />
+    <Image Include="Resources\tex1.jpg" />
+    <Image Include="Resources\tex2.jpg" />
+    <Image Include="Resources\tex3.jpg" />
+    <Image Include="Resources\tex4.jpg" />
+    <Image Include="Resources\tex5.jpg" />
+    <Image Include="Resources\tex6.jpg" />
+    <Image Include="Resources\tex7.jpg" />
+    <Image Include="Resources\tex8.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BobbyWorld.rc" />
