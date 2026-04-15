@@ -81,7 +81,7 @@ HUD::HUD() :
 
 	// Version
 	versionText.setFont(font);
-	versionText.setString("Version 0.8"); // Ver
+	versionText.setString("Version 1.0.0"); // Ver
 	versionText.setCharacterSize(16);
 	versionText.setFillColor(sf::Color(200, 200, 200, 150));
 	versionText.setPosition({ 1112.f, 660.f });
